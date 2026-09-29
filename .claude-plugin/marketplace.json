@@ -1,0 +1,14 @@
+{
+  "name": "skillbook",
+  "description": "Team skills for Claude Code: shared ways of working across all projects.",
+  "owner": {
+    "name": "yasabh"
+  },
+  "plugins": [
+    {
+      "name": "skillbook",
+      "source": ".",
+      "description": "Team skills for Claude Code: shared ways of working across all projects."
+    }
+  ]
+}

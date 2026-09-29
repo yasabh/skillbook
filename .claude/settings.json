@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "skillbook": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/yasabh/skillbook.git"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "skillbook@skillbook": true
+  }
+}

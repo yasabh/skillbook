@@ -1,0 +1,8 @@
+{
+  "name": "skillbook",
+  "version": "0.1.0",
+  "description": "Team skills for Claude Code: shared ways of working across all projects (commit, ...).",
+  "author": {
+    "name": "yasabh"
+  }
+}
