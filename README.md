@@ -37,6 +37,18 @@ add `.claude/settings.local.json` to the repo's `.gitignore` (personal settings 
 
 **Everywhere on your laptop:** put the same two keys in `~/.claude/settings.json`.
 
+**If the install offer doesn't appear (e.g. the VS Code extension, which has no
+`/plugin` command):** clone this repo and link each skill into your personal skills
+folder. `git pull` in the clone updates them; open a new session to load changes.
+
+```bash
+git clone https://github.com/yasabh/skillbook.git ~/skillbook
+mkdir -p ~/.claude/skills
+for s in ~/skillbook/skills/*/; do ln -sfn "$s" ~/.claude/skills/"$(basename "$s")"; done
+```
+
+Skills linked this way are called without the plugin prefix (`/commit`).
+
 **Manually, in a Claude Code session:**
 
 ```
