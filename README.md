@@ -10,6 +10,7 @@ files (open Agent Skills format), so other tools can read `skills/` directly.
 |---|---|
 | `commit` | Conventional Commits, one commit per piece of work with a short why in the body; lint first; only when asked, no Co-Authored-By, no push unless asked |
 | `docker-image-update` | Bump and pin Docker base images to LTS/latest stable, validate major-version config changes, back up and roll out one service at a time |
+| `save-claude` | Save what a session learned: personal state/decisions to Claude's memory, shared repo know-how to `CLAUDE.md`; only what a fresh session would otherwise get wrong |
 | `write-tests` | Tests named as sentences, fakes that act like the real system, silent failures first; checks for performance (a perf fix needs its own test), maintenance (deterministic, nothing left in the repo) and security (no real secrets/hosts, every guard tested to refuse) |
 
 ## Install
