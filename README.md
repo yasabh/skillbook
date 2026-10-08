@@ -9,6 +9,7 @@ files (open Agent Skills format), so other tools can read `skills/` directly.
 | Skill | Use |
 |---|---|
 | `commit` | Conventional Commits, one commit per piece of work with a short why in the body; lint first; only when asked, no Co-Authored-By, no push unless asked |
+| `docker-image-update` | Bump and pin Docker base images to LTS/latest stable, validate major-version config changes, back up and roll out one service at a time |
 
 ## Install
 
