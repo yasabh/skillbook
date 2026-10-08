@@ -10,6 +10,7 @@ files (open Agent Skills format), so other tools can read `skills/` directly.
 |---|---|
 | `commit` | Conventional Commits, one commit per piece of work with a short why in the body; lint first; only when asked, no Co-Authored-By, no push unless asked |
 | `docker-image-update` | Bump and pin Docker base images to LTS/latest stable, validate major-version config changes, back up and roll out one service at a time |
+| `write-tests` | Tests named as sentences, fakes that act like the real system, silent failures first; checks for performance (a perf fix needs its own test), maintenance (deterministic, nothing left in the repo) and security (no real secrets/hosts, every guard tested to refuse) |
 
 ## Install
 
