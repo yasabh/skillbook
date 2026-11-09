@@ -1,6 +1,6 @@
 {
   "name": "skillbook",
-  "description": "Team skills for Claude Code: shared ways of working across all projects.",
+  "description": "Shared team skills: shared ways of working across all projects.",
   "owner": {
     "name": "yasabh"
   },
@@ -8,7 +8,7 @@
     {
       "name": "skillbook",
       "source": ".",
-      "description": "Team skills for Claude Code: shared ways of working across all projects."
+      "description": "Shared team skills: shared ways of working across all projects."
     }
   ]
 }

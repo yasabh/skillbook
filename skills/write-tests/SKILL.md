@@ -1,12 +1,15 @@
 ---
 name: write-tests
-description: Write or extend automated tests the team's way, with tests named as sentences, fakes that act like the real system, no real network or secrets, and the silent failures covered, and weigh performance, maintenance and security while doing it. Use when the user asks to "write/add tests", "bikin test", "tambah test", "test this fix", or when a fix or feature needs a test to prove it.
+description: Write or extend automated tests the team's way, with tests named as sentences, fakes that act like the real system, no real network or secrets, and the silent failures covered, and weigh performance, maintenance and security while doing it. Use when the user asks to "write/add tests", "bikin test", "tambah test", "test this fix", or when a fix or feature needs a test to prove it. Not for finding why something is broken (debug-safely).
 ---
 # Write tests
 
 Goal: a test suite that reads like a spec, runs fast without any external system, and
 fails when behaviour that matters breaks. Most importantly, it catches the failures
 that otherwise make no noise.
+
+> **Gate:** check and recommend first; change nothing until the user approves. Here: after
+> §1–2, list the planned tests (name as a sentence, what it proves, fakes needed) and wait.
 
 ## 1. Read before writing
 
@@ -34,6 +37,11 @@ Choose cases in this order:
 3. **Refusals and edges**: the stranger, the expired, the blank field, the outage, the
    case-and-whitespace variant, the value that changed hands.
 4. The happy path. It usually gets exercised anyway.
+
+**Refactor or cleanup** (same behaviour, new shape): the existing suite is the proof.
+Run it before and after; it MUST pass unchanged. A test you had to edit means behaviour
+changed: say which. Code no test reaches (browser JS without node or a browser): say so
+in the report instead of calling it verified.
 
 ## 3. How a test reads
 
@@ -113,5 +121,5 @@ Choose cases in this order:
 
 Run the whole suite, not just the new file. Report in a few lines: tests added (by
 name), pass/fail counts, and any failure that was already there, with proof that it
-was (the stash run). Commit only when asked, with the `commit` skill. The test goes
+was (the stash run). Commit only when asked, with the `commit-git` skill. The test goes
 in the same commit as the code it covers.

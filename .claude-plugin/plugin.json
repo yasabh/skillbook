@@ -1,7 +1,7 @@
 {
   "name": "skillbook",
-  "version": "0.2.0",
-  "description": "Team skills for Claude Code: shared ways of working across all projects (commit, ...).",
+  "version": "0.6.5",
+  "description": "Shared team skills: shared ways of working across all projects (commit-git, ...).",
   "author": {
     "name": "yasabh"
   }
