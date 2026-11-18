@@ -1,6 +1,6 @@
 ---
 name: debug-safely
-description: Find the cause of a bug or outage without making it worse: reproduce, read-only on production, one change at a time, on copies of data, and lock the fix with a test. Use when something is broken or behaves oddly and the cause is not known yet, e.g. "error", "bad gateway", "kok gak jalan", "kenapa ...", "bug", "rusak", "lemot", "debug", "cek kenapa", a stack trace or a screenshot of a failure. Not for a fix whose cause is already known (go straight to code-standard).
+description: Find the cause of a bug or outage without making it worse. Use when something is broken or behaves oddly and the cause is not known yet, e.g. "error", "bad gateway", "kok gak jalan", "kenapa ...", "bug", "rusak", "lemot", "debug", "cek kenapa", a stack trace or a screenshot of a failure. Not for a fix whose cause is already known (go straight to code-standard).
 ---
 # Debug safely
 
@@ -28,9 +28,12 @@ Words: **MUST / NEVER** = hard rule. **SHOULD** = default; break it only with a 
 
 - Write the suspected cause in one line, and the check that would prove or kill it.
 - **One change per try.** Two changes at once and you cannot tell which helped.
+- A hypothesis proved wrong: MUST revert the change it motivated before the next try.
 - Prefer the check that can only be read one way (a header, a log line with a timestamp,
   a query count) over "it seems to work now".
 - Measure on the real host; a laptop is ~10× faster than a Pi and lies about timing.
+- Two fixes failed on the same assumption: SHOULD write it in one line and test it before
+  a third fix.
 - Time box: two dead ends → stop, report what was ruled out and the next best check.
 
 ## 3. Production is read-only
@@ -50,6 +53,8 @@ Words: **MUST / NEVER** = hard rule. **SHOULD** = default; break it only with a 
 ## 5. Fix and lock it
 
 - Fix the root cause once, in the shared code; grep every caller (`code-standard`).
+- Before adding a guard, retry or default: can this state legitimately happen? If not, the
+  guard hides the bug; find what produced it.
 - Lock it with a test that fails without the fix and passes with it (`write-tests`).
 - Startup races and first-seconds errors: recheck before calling them the cause.
 

@@ -3,6 +3,7 @@
 
 /* --- tokens --- */
 :root {
+  color-scheme: light;
   --bg: #f6f6f4;
   --card: #fff;
   --text: #1c1c1a;
@@ -21,8 +22,11 @@
   --err: #b91c1c;
 }
 
+/* Dark: the OS setting, unless the user chose light; or the user chose dark.
+   data-theme on <html> is set by the theme toggle (localStorage["theme"]). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg: #161615;
     --card: #1f1f1d;
     --text: #ececea;
@@ -40,6 +44,26 @@
     --info: #bcd0ff;
     --err: #f87171;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #161615;
+  --card: #1f1f1d;
+  --text: #ececea;
+  --muted: #a3a39d;
+  --line: #34342f;
+  --line2: #2a2a27;
+  --accent: #6b8cff;
+  --accent-text: #0b0b0a;
+  --pend-bg: #2b2414;
+  --pend: #fbbf24;
+  --pend-ring: #f59e0b;
+  --off: #4a4a45;
+  --info-bg: #172036;
+  --info-line: #2c3e66;
+  --info: #bcd0ff;
+  --err: #f87171;
 }
 
 /* --- base --- */

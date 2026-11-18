@@ -57,4 +57,3 @@ Copied in (not loaded from outside) so the guidance can't change under us:
 ## Based on (copied, not linked; don't fetch these while using the skill)
 
 - WCAG 2.2 (contrast, focus), WAI-ARIA Authoring Practices
-- Anthropic `frontend-design` skill (direction and "generated look" tells), read 2026-11-05

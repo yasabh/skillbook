@@ -34,6 +34,8 @@ checks here.
   with reasons).
 - [ ]  No dead code, stale branches or abandoned config that misleads.
   Report, don't delete.
+- [ ]  `shortcut:` comments listed (`git grep -n 'shortcut:'`); one with no "when to
+  revisit" is a finding.
 - [ ]  Deploy is repeatable from the repo (script, not memory).
 - [ ]  Backup and restore path known for any data the project owns.
 

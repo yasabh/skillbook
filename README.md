@@ -107,3 +107,7 @@ skills/<name>/SKILL.md            one folder per skill
    to use it; keep the body to what Claude wouldn't do by default, with steps and examples.
 2. Try it in two or three different repos before relying on it.
 3. Add a row to the table above, then commit and bump `version` as `CLAUDE.md` says.
+
+## License
+
+MIT, see `LICENSE`.

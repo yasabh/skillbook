@@ -1,6 +1,6 @@
 ---
 name: write-tests
-description: Write or extend automated tests the team's way, with tests named as sentences, fakes that act like the real system, no real network or secrets, and the silent failures covered, and weigh performance, maintenance and security while doing it. Use when the user asks to "write/add tests", "bikin test", "tambah test", "test this fix", or when a fix or feature needs a test to prove it. Not for finding why something is broken (debug-safely).
+description: Write or extend automated tests the team's way. Use when the user asks to "write/add tests", "bikin test", "tambah test", "test this fix", or when a fix or feature needs a test to prove it. Not for finding why something is broken (debug-safely).
 ---
 # Write tests
 
@@ -86,7 +86,8 @@ in the report instead of calling it verified.
 ## 6. Maintenance
 
 - Test the behaviour, not the implementation: refactoring shouldn't break tests unless
-  behaviour changed.
+  behaviour changed. Check: break the behaviour and the test MUST fail; change only the
+  internals and it MUST still pass.
 - Deterministic: no wall clock, no randomness without a seed, no dependence on test
   order or on the machine's timezone (set `TZ` in conftest).
 - Leave nothing behind in the repo. Redirect caches (`cache_dir` in `pytest.ini`, and
@@ -112,6 +113,8 @@ in the report instead of calling it verified.
 - Test that rejected input **never reaches** the expensive or dangerous call (e.g. a
   blank password or a bad CSRF token never calls RADIUS), not only that the status code
   is right.
+- A "never calls X" test MUST be paired with a case where X is called, or it cannot show
+  it sees calls.
 - Keep outage and denial distinct (`503` vs `401`, outage not counted toward the
   lockout). Users and attackers must not be able to confuse one with the other.
 - Hostile input where the code parses: odd separators and case, overlong values,

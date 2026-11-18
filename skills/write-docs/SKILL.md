@@ -1,6 +1,6 @@
 ---
 name: write-docs
-description: Write or update a repo's documentation the team's way - README.md, CLAUDE.md, ADRs in docs/adr/ and the lessons log in docs/lessons.md - with fixed section titles, verified commands, no secrets and one fact in one place. Use when the user asks to "write/update the README", "bikin readme", "rapikan readme", "update CLAUDE.md", "bikin CLAUDE.md", "rapikan dokumentasi", "tulis ADR", "catat lesson", or when save-session or baseline-project hands over a fact for one of these files.
+description: Write or update a repo's documentation the team's way - README.md, CLAUDE.md, ADRs in docs/adr/ and the lessons log in docs/lessons.md. Use when the user asks to "write/update the README", "bikin readme", "rapikan readme", "update CLAUDE.md", "bikin CLAUDE.md", "rapikan dokumentasi", "tulis ADR", "catat lesson", or when save-session or baseline-project hands over a fact for one of these files.
 ---
 # Write docs
 

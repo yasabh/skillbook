@@ -13,6 +13,8 @@ Load when the project has a `Dockerfile` or compose file.
 ## Scan
 
 Pin the scanner's own version; run it as a container if it isn't installed.
+SHOULD check `docker context show` first: on a remote context, `-v` mounts and image
+pulls happen on that host; use `--context default` or `docker cp`.
 
 ```bash
 # registry tag: no Docker socket needed

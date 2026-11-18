@@ -1,6 +1,6 @@
 ---
 name: commit-git
-description: Commit changes in the team's Conventional Commits format, one commit per piece of work, each with a one-line why (the problem it solves), or none when the subject says it all. Use ONLY when the user explicitly asks to commit ("commit", "commit simple", "bikin commit"). NEVER commit on your own initiative, NEVER push unless asked.
+description: Commit changes in the team's Conventional Commits format, one commit per piece of work. Use ONLY when the user explicitly asks to commit ("commit", "commit simple", "bikin commit"). NEVER commit on your own initiative, NEVER push unless asked.
 ---
 # Commit
 
@@ -11,7 +11,8 @@ passing tests or a clean lint is **not** a reason to commit on your own.
 > proposed commit list (step 4).
 
 Load `references/special-cases.md` for a version bump, a revert, a commit that closes an
-issue, a breaking change, or a repo that works with pull requests.
+issue, a breaking change, a repo that works with pull requests, or examples of wrong
+messages when unsure about one.
 
 ## Message format (Conventional Commits 1.0.0)
 
@@ -51,26 +52,6 @@ fix: caddy cert lifetime 12h -> 7d
 refactor(baseline-project): rename project-baseline to baseline-project
 
 Match the verb-noun naming every other skill already uses.
-```
-
-Wrong:
-
-```
-Updated files                         <- no type
-fix: changed lifetime                 <- no why
-fix: caddy cert lifetime 12h -> 7d
-                                      <- why names no problem, only the
-tolerate clock drift                     effect: what broke? why 7d?
-feat: Add runner.                     <- capitalised, trailing period
-fix: lifetime 7d
-   tolerate clock drift               <- why must follow a blank line
-refactor: move script                 <- two types in one commit: split it
-fix: lifetime 7d
-refactor: rename x to y
-                                      <- backstory instead of the reason:
-The old name was the only one not in     one line is enough
-the form the others use, and the team
-already calls the job that.
 ```
 
 ## Splitting changes into commits

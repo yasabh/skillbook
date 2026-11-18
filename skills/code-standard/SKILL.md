@@ -1,6 +1,6 @@
 ---
 name: code-standard
-description: The team's code standard for small web apps, the page (HTML, CSS, vanilla JS) and the light backend behind it (Python), in this priority order, maintainable with few lines first, then light on CPU, RAM and network, then secure. Loads only the references for the stacks being touched. Use when the user asks to "build/add a page or endpoint", "bikin halaman", "bikin UI", "bikin endpoint/API", "tambah fitur", "ubah tampilan", "rapikan kode", "fix the page", "code standar", or when a feature needs a browser UI. Not for a bug whose cause is unknown (debug-safely), a security audit (check-security), version bumps (update-deps), claude.ai artifacts (artifact-design) or one-word text edits.
+description: The team's code standard for small web apps, the page (HTML, CSS, vanilla JS) and its light Python backend. Use when the user asks to "build/add a page or endpoint", "bikin halaman", "bikin UI", "bikin endpoint/API", "tambah fitur", "ubah tampilan", "rapikan kode", "fix the page", "code standar", or when a feature needs a browser UI. Not for a bug whose cause is unknown (debug-safely), a security audit (check-security), version bumps (update-deps), claude.ai artifacts (artifact-design) or one-word text edits.
 ---
 # Code standard
 
@@ -14,6 +14,7 @@ with a reason you state.
 > **Gate:** check and recommend first; change nothing until the user approves. Here:
 > after §1, list what will be built (screens, endpoints, files touched) and wait. A
 > request that only says "desain" gets one question first: mockup only, or implement?
+> A question or idea ("why not X?", "knp ga …") is NOT approval: answer, re-plan, wait.
 
 ## 1. Read, then load only what applies
 
@@ -40,20 +41,30 @@ with a reason you state.
 ## 2. Rules for every stack
 
 **Maintenance (1)**
-- **Least new code that fully solves it.** Take the first option that works: needed at
-  all? (name skipped extras in one line) → already in this codebase → stdlib/platform →
-  an installed dependency → one readable line → the minimum code. NEVER add a
-  dependency, framework, bundler or CDN for a few lines.
-- Lazy about the solution, never about the change: MUST finish every caller, test and
-  fixture it touches. Bug fix: grep the callers, fix the root cause once.
-- NEVER add an option, wrapper, config or "for later" code nobody asked for. Deletion
-  beats addition.
+- **Prefer not writing code.** Stop at the first step that covers the need: drop it if
+  nobody needs it (say in one line what you left out) → reuse what this repo has → use the
+  language or platform → use a dependency already installed → a single clear line → only
+  then the smallest version. NEVER pull in a dependency, framework, bundler or CDN to save
+  a few lines.
+- Small solution, complete job: MUST update every caller, test and fixture the change
+  affects. Bug fix: grep the callers, repair the cause in one place.
+- Code you move or merge MUST keep its error handling and validation.
+- NEVER add options, wrappers, config or speculative code the request does not call for.
+  Removing code beats adding it.
 - Merge a repeated pattern into one helper only if it has one job, a clear name, ≤4
   parameters and **no switch parameter** (`mode`, `step < 0` branches inside). Needs a
   switch → two concepts, keep both. Count concepts a reader holds, not lines.
+- A feature that needs a new `if` or flag in an unrelated flow is a design problem: SHOULD
+  move the logic to the code that owns it, or propose a reshape so the special case
+  disappears.
+- NEVER add a default that hides a value which must exist; let it fail loudly. Defaults
+  are only for values that are truly optional.
+- A refactor SHOULD leave a reader fewer concepts to hold at once (a split by job counts);
+  if it only adds names or files, drop it.
 - SHOULD: small named functions; one statement per line; lines under ~100 characters;
-  no nested ternaries. A one-liner that needs decoding is not short.
-- Comments: the **why** in one line. Known limit: `shortcut: <the limit>, <when to upgrade>`.
+  no nested ternaries. A dense one-liner is not a saving.
+- Comments: the **why** in one line. Known limit:
+  `shortcut: <what it cannot handle>, <when to revisit>`.
 - Delete what you replace: no commented-out code, no unused names.
 
 **Performance (2)**
@@ -62,6 +73,8 @@ with a reason you state.
   server only by an indexed column; cache slow upstream answers briefly; poll only while
   something is pending.
 - MUST measure on the real host before calling it fast (a Pi is ~10× slower than a laptop).
+  A speed number counts only with zero errors in the run and a gap larger than the spread
+  between repeated runs.
 
 **Security (3)**
 - MUST validate on the server as if the page did not exist.
@@ -70,17 +83,20 @@ with a reason you state.
 - Every state change MUST be POST + JSON + matching `Origin`. GET NEVER changes anything.
 - Errors: short to the user, detail in the server log. Audit who changed what and why.
 
-**NEVER cut to save lines:** validation at trust boundaries, error handling that prevents
-data loss, security, accessibility, anything the user asked for.
+**NEVER trim these to shorten code:** input checks at trust boundaries, error handling
+that protects data, security, accessibility, or anything the user requested.
 
 ## 3. Verify
 
-1. Run the backend tests (`write-tests`), including refusals: outside the ACL, wrong
+1. Reread your own diff before testing: SHOULD delete any branch, helper or state it turns
+   out not to need. Bigger restructuring of existing code: propose it in the report, don't
+   do it.
+2. Run the backend tests (`write-tests`), including refusals: outside the ACL, wrong
    origin, out-of-range input.
-2. Syntax-check JS with `node --check` when node exists; say so when it does not.
-3. See the page in a browser or ask for a screenshot. Say plainly what was not seen running.
-4. Deploying is a separate, approved step.
-5. After a deploy, MUST confirm the running container holds the new code (a new symbol or
+3. Syntax-check JS with `node --check` when node exists; say so when it does not.
+4. See the page in a browser or ask for a screenshot. Say plainly what was not seen running.
+5. Deploying is a separate, approved step.
+6. After a deploy, MUST confirm the running container holds the new code (a new symbol or
    file inside it, its start time) before asking anyone to test.
 
 ## 4. Report

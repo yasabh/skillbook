@@ -30,6 +30,8 @@ Read with `SKILL.md` §2. MUST/NEVER = hard rule; SHOULD = default.
   Real bugs: log once with `log.exception`.
 - `logging` with a module logger, NEVER `print`. Imports absolute or same-directory;
   NEVER edit `sys.path` in production code.
+- One log line per event, `<area> <event> key=value ...`, so a log store can query by
+  field without code changes.
 - Stdlib first (`http.server`, `sqlite3`, `json`, `heapq`); a new dependency needs a
   reason and a pinned version.
 
@@ -49,7 +51,9 @@ with read_db(api) as conn:
 ## Performance
 
 - SQLite reads: read-only (`file:...?mode=ro`, `uri=True`), short-lived, with a
-  `timeout`. Writers: `BEGIN IMMEDIATE`, short transactions.
+  `timeout`. Writers: `BEGIN IMMEDIATE`, short transactions; writes that belong together
+  MUST share one transaction, with slow work (HTTP, subprocess) done before `BEGIN`, so a
+  failure cannot leave half of them.
 - Let SQL do set work (temp tables, `JOIN`, `GROUP BY`); NEVER load a big table into a
   dict. Check the plan uses a key or index (`EXPLAIN QUERY PLAN`).
 - Keyset paging: `WHERE key > ? ORDER BY key LIMIT n+1` (the extra row means "there is a
@@ -88,6 +92,18 @@ with read_db(api) as conn:
 - State changes: POST + `application/json` + matching `Origin`.
 - Static files: a fixed allow-list of URL → file; NEVER a path from the request.
 - HTML built in Python: `html.escape()` every value (a username is input too).
+- Login: one error message for a wrong user, password or code (no enumeration); every
+  failed factor counts toward the same lockout; an upstream outage never counts.
+- A second factor MUST NOT be stored or generated on the device it protects; first
+  enrolment needs a channel already trusted (e.g. office network identity + password).
+- A new second factor MUST be confirmed with a code from it before it replaces the old
+  one; an unconfirmed setup expires.
+- Device or session limits count what is live, not what was registered, so a lost
+  device frees its place on its own.
+- Integrating a router or appliance: SHOULD let it pull the full desired state from the
+  app (token + source IP check) rather than give the app write credentials to it.
+- Sign-in lives in one place: a page that needs a (fresh) sign-in redirects to the
+  existing login with `?next=`, NEVER grows its own password form.
 - Catch specific exceptions; NEVER bare `except:` or `except Exception: pass`.
 - NEVER `eval`/`exec`, `pickle.loads` on outside data, `shell=True` with input,
   `verify=False`, or secrets in code or logs.
@@ -103,5 +119,4 @@ conn.execute(f"SELECT 1 FROM feed_rows WHERE value = ? AND feed IN ({marks})", (
 ## Based on (copied, not linked; don't fetch these while using the skill)
 
 PEP 8; Python docs (`sqlite3`, `http.server`: not for public exposure without a proxy);
-OWASP cheat sheets (Query Parameterization, Logging); `python-code-standards` by
-outcomeeng (MIT), read 2026-11-05, taken in part.
+OWASP cheat sheets (Query Parameterization, Logging).

@@ -74,5 +74,4 @@ td.textContent = user;
 
 ## Based on (copied, not linked; don't fetch these while using the skill)
 
-MDN (modules, CSP); OWASP cheat sheets (XSS, CSRF, CSP); `javascript-pro` by jeffallan
-(MIT) and `javascript-expert` by martinholovsky, read 2026-11-05, taken in part.
+MDN (modules, CSP); OWASP cheat sheets (XSS, CSRF, CSP).

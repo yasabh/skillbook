@@ -1,6 +1,6 @@
 ---
 name: check-security
-description: Check a project for security problems (vulnerable dependencies, runtimes and images, leaked secrets, unsafe config and access) in any stack, rank what actually matters, and recommend the smallest safe fix or version to move to. Use when the user asks "is this safe", "is this version safe", "scan for vulns", "check CVEs", "check secrets", "security audit", "which version is safe/bug free", "cek CVE", "cek vuln", "cek keamanan", "versi mana yang aman", "aman gak versi ini", before update-deps pins a target, or for the security part of a baseline-project audit. Not for writing new code (code-standard) or doing the upgrade itself (update-deps).
+description: Check a project for security problems (vulnerable dependencies, runtimes and images, leaked secrets, unsafe config and access) in any stack. Use when the user asks "is this safe", "is this version safe", "scan for vulns", "check CVEs", "check secrets", "security audit", "which version is safe/bug free", "cek CVE", "cek vuln", "cek keamanan", "versi mana yang aman", "aman gak versi ini", before update-deps pins a target, or for the security part of a baseline-project audit. Not for writing new code (code-standard) or doing the upgrade itself (update-deps).
 ---
 # Check security
 
@@ -18,6 +18,7 @@ of <date> in <sources>".
 | `references/docker.md` | a `Dockerfile` or compose file exists |
 | `references/linux.md` | shell scripts, or Linux hosts with LUKS, systemd or mount points |
 | `references/web.md` | the project serves HTML or an HTTP API, or sits behind a proxy |
+| `references/pki.md` | the project makes or holds TLS certs, private keys or a private CA |
 
 Which lessons earn a reference (new or existing): `save-session` decides.
 

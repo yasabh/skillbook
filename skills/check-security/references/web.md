@@ -22,6 +22,10 @@ Code rules for building these live in `code-standard`; this is the audit list.
 - A proxy chain (gateway → ingress → app) must pass the client address hop by hop, and
   the auth service must trust every hop that forwards it → else auto-login fails and
   `/login` ↔ page loops (`ERR_TOO_MANY_REDIRECTS`).
+- A trusted hop that passes the header on as received (nginx `$http_x_real_ip`) must be
+  reachable only by the hop that sets it → its own docker network with just that hop and
+  the auth service, never the shared one; else any app there forges it through the hop.
+  Not nginx `set_real_ip_from <name>`: resolved once at start, breaks on recreate.
 - Authorization (ACL) is checked in the app on every request, not only at the edge.
 - Every state change: POST + `Content-Type: application/json` + matching `Origin` → a
   cross-site form cannot send that.
@@ -32,8 +36,11 @@ Code rules for building these live in `code-standard`; this is the audit list.
   `absolute_redirect off;` (relative `Location`).
 - `proxy_pass` to a variable + `resolver 127.0.0.11` so a restarted backend's new IP is
   picked up; the app port is not published on the host.
+- An nginx `add_header` inside a location drops every server-level one, HSTS included →
+  `add_header_inherit merge;` at server level (nginx 1.29.3+).
 
 ## Verify
 
-Each guard has a refusal test: direct caller with the header, user outside the ACL,
+Each guard has a refusal test: direct caller with the header, another app on the shared
+network reaching a pass-through hop, user outside the ACL,
 wrong `Origin`, out-of-range number, unlisted file, a `<b>` username on the error page.

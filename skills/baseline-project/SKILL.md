@@ -1,6 +1,6 @@
 ---
 name: baseline-project
-description: Bring a project, new, existing or drifted, up to the team baseline so later sessions and teammates understand it and it is safe to maintain. Reads the repo, interviews the user about purpose, people and constraints, audits security, maintenance and performance, then writes a standard README.md and short CLAUDE.md and proposes fixes. Use when starting a project, onboarding an existing repo, or when the user says "init project", "setup project", "baseline", "audit this project/repo", "re-baseline", "rapikan project", "luruskan project", "project sudah melenceng", "bikin project baru", "pahami project ini", "standarkan project". Not for building or fixing one feature or file (code-standard).
+description: Bring a project, new, existing or drifted, up to the team baseline with an interview, an audit, a standard README.md and a short CLAUDE.md. Use when starting a project, onboarding an existing repo, or when the user says "init project", "setup project", "baseline", "audit this project/repo", "re-baseline", "rapikan project", "luruskan project", "project sudah melenceng", "bikin project baru", "pahami project ini", "standarkan project". Not for building or fixing one feature or file (code-standard).
 ---
 # Baseline project
 
@@ -92,6 +92,9 @@ first. This skill adds:
 - **Lessons** (existing project): candidates from `fix:` commits, gotchas in CLAUDE.md or
   README, and what the user recalls. Write the ones the user confirms.
 - **CLAUDE.md**: the `write-docs` template, only rules that apply to this project.
+- **Memory**: MUST write a feedback memory for this project: "When a discussion ends
+  with decisions, pending work or a lesson not yet saved, suggest `/save-session`." The
+  index loads every session, so the reminder keeps working after the baseline.
 
 Facts and assumptions stay separate. NEVER a secret value in a file; name where it lives.
 NEVER copy from other private repos: shared knowledge lives in this skill's `references/`.

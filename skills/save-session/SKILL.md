@@ -1,6 +1,6 @@
 ---
 name: save-session
-description: Save what a session learned to the right place so later sessions and teammates can use it. Decides per fact where it goes (Claude's memory, CLAUDE.md, README, docs/lessons.md, ADR, skillbook reference), keeps one fact in one place, writes memory and communication preferences itself and hands repo files to write-docs. Use when the user says "simpan memori", "save memory", "remember this", "catat", "simpan pelajaran", "simpan session", or at the end of a long working session when asked to wrap up.
+description: Save what a session learned to the right place (Claude's memory, CLAUDE.md, README, docs/lessons.md, ADR, skillbook reference). Use when the user says "simpan memori", "save memory", "remember this", "catat", "simpan pelajaran", "simpan session", or at the end of a long working session when asked to wrap up.
 ---
 # Save session
 
@@ -57,7 +57,8 @@ without it?"** No → drop it.
   repo, then delete the entry; update an entry instead of adding a near-duplicate; no
   status logs in CLAUDE.md.
 - **Prefer a guardrail to a sentence**: if a check, script step or test can prevent the
-  repeat, propose it with the note.
+  repeat, propose it with the note. A written rule broken again: the sentence failed, MUST
+  propose a check; drop a rule once its mistake cannot happen.
 
 **Save:** decisions and their reason (rejected options too); state of unfinished work
 (deployed, pending, what to check next); gotchas found the hard way (a silent no-op

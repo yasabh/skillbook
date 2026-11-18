@@ -1,6 +1,6 @@
 ---
 name: update-deps
-description: Upgrade and pin a project's dependencies in any stack (libraries, runtimes, tools, base images) to the newest LTS or latest stable, check candidates with check-security, validate major-version breaking changes, and roll out safely. Use when the user asks to "update/upgrade/bump dependencies, packages, images or versions", "check latest versions", "pin versions", "pakai LTS", "update versi", "upgrade library", or to choose an image variant (alpine vs slim).
+description: Upgrade and pin a project's dependencies in any stack (libraries, runtimes, tools, base images) to the newest LTS or latest stable. Use when the user asks to "update/upgrade/bump dependencies, packages, images or versions", "check latest versions", "pin versions", "pakai LTS", "update versi", "upgrade library", or to choose an image variant (alpine vs slim).
 ---
 # Update dependencies
 

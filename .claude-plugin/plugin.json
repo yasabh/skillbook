@@ -1,8 +1,10 @@
 {
   "name": "skillbook",
-  "version": "0.6.5",
+  "version": "0.6.16",
   "description": "Shared team skills: shared ways of working across all projects (commit-git, ...).",
   "author": {
-    "name": "yasabh"
-  }
+    "name": "abdyas.dev",
+    "url": "https://abdyas.dev"
+  },
+  "license": "MIT"
 }

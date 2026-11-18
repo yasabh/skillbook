@@ -72,6 +72,8 @@ RUN set -e; for f in /usr/share/grafana/public/build/static/img/grafana_icon.*.s
   file copy, because of WAL). Majors may write data the old version can't read.
 - One service at a time, lowest risk first: language images, then metrics, logs, then UI
   (`docker compose up -d --build <svc>`). If the user builds all at once, check all.
+- `--no-deps` on any service with `depends_on`: without it compose may recreate those
+  services too (it once restarted an auth service and signed every user out).
 - After deploy: versions (`buildinfo`, `/api/health`, `python -V`), readiness, scrape
   targets, old data still queryable, error logs after warm-up, CPU/RAM vs before.
 - Errors in the first seconds (e.g. Loki "empty ring", connection refused to a peer
